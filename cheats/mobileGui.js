@@ -161,7 +161,7 @@
         bodyDiv.appendChild(footer);
         footer.style.fontSize = '0.9rem';
         footer.style.paddingBottom = '5px';
-        footer.innerHTML = (`<span><a target="blank" href="https://github.com/05Konz/Blooket-Cheats">GitHub - 05Konz</a></span>`);
+        footer.innerHTML = (`<span><a target="blank" href="https://discord.gg/jHjGrrdXP6">Discord</a><br/><a target="blank" href="https://github.com/05Konz/Blooket-Cheats">GitHub - 05Konz</a></span>`);
         
         let cheats = ({
             global: [
@@ -2510,7 +2510,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692640272431 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1692656146154 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
