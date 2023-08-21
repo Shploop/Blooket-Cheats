@@ -1,0 +1,30 @@
+name: Suggestion
+description: Suggest a cheat or script
+title: "IDEA: Script idea name"
+labels: ["enhancement"]
+body:
+  - type: input
+    id: gamemode
+    attributes:
+      label: Gamemode
+      description: Gamemode for cheat to be for
+      placeholder: Gamemode
+  - type: textarea
+    id: function
+    attributes:
+      label: Function
+      description: What does the script do?
+      placeholder: Script function
+    validations:
+      required: true
+  - type: dropdown
+    id: confirm
+    attributes:
+      label: FaQ
+      description: Please make sure to read [the FaQ](https://github.com/Minesraft2/Blooket-Cheats/wiki#faq) before submitting any suggestions
+      multiple: true
+      options:
+        - I have not read the FaQ
+        - I have read the FaQ and my suggestion has not already been asked for or isn't possible
+    validations:
+      required: true
