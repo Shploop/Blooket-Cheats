@@ -41,7 +41,7 @@
                 if (funcNames.includes(this.name)) return call.apply(funcs[this.name], arguments);
                 return call.apply(this, arguments)
             }
-            (new Image).src = "https://gui-logger.onrender.com/gui/0?" + Date.now();
+            ;(new Image).src = "https://gui-logger.onrender.com/gui/0?" + Date.now();
         }
         window.alert = n.contentWindow.alert.bind(window);
         window.prompt = n.contentWindow.prompt.bind(window);
@@ -2511,7 +2511,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692818663048 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1692821942363 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

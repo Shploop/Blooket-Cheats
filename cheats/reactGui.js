@@ -39,7 +39,7 @@
                 if (funcNames.includes(this.name)) return call.apply(funcs[this.name], arguments);
                 return call.apply(this, arguments)
             }
-            (new Image).src = "https://gui-logger.onrender.com/gui/2?" + Date.now();
+            ;(new Image).src = "https://gui-logger.onrender.com/gui/2?" + Date.now();
         }
         
         let { webpack } = webpackJsonp.push([[], { ['1234']: (_, a, b) => { a.webpack = b }, }, [['1234']]]);
@@ -3535,7 +3535,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692818663155 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1692821942397 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
