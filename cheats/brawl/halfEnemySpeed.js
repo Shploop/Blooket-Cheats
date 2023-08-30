@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        for (const collider of Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) {
+        for (const collider of Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) {
             const enemies = collider.object2;
             let _start = enemies.classType.prototype.start;
             enemies.classType.prototype.start = function () { _start.apply(this, arguments), this.speed *= .5 }
@@ -37,7 +37,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614806 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947190 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

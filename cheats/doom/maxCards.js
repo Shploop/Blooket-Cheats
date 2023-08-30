@@ -19,7 +19,7 @@
         window.alert = i.contentWindow.alert.bind(window);
         i.remove();
         if (window.location.pathname == "/tower/map") {
-            const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
             stateNode.props.tower.cards.forEach(card => {
                 card.strength = 20;
                 card.charisma = 20;
@@ -43,7 +43,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614883 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947306 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

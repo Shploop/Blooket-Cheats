@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        let { state } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode;
+        let { state } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode;
         if (state.stage == "hack") for (const button of document.querySelector('div[class^=styles__buttonContainer]').children) button.innerText == state.correctPassword && button.click();
     });
     let img = new Image;
@@ -33,7 +33,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614846 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947256 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

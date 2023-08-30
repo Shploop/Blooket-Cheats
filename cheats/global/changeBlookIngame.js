@@ -18,7 +18,7 @@
         document.body.append(i);
         window.prompt = i.contentWindow.prompt.bind(window);
         i.remove();
-        let { props } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode;
+        let { props } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode;
         props.client.blook = prompt("Blook Name: (Case Sensitive)");
         props.liveGameController.setVal({ path: `c/${props.client.name}/b`, val: props.client.blook });
     });
@@ -38,7 +38,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614941 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947381 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

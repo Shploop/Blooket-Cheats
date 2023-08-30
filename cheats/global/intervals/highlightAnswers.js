@@ -15,7 +15,7 @@
 (() => {
     const cheat = (async () => {
         setInterval(() => {
-            const { stateNode: { state, props } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+            const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
             [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
                 if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i])) answer.style.backgroundColor = "rgb(0, 207, 119)";
                 else answer.style.backgroundColor = "rgb(189, 15, 38)";
@@ -38,7 +38,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614980 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947410 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

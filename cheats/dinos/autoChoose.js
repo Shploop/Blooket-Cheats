@@ -21,7 +21,7 @@
         })();
         
         try {
-            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
             if (stateNode.state.stage === "excavate") {
                 stateNode.state.choices.length || (stateNode.state.choices = getFossils());
                 let max = 0, index = -1;
@@ -51,7 +51,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614866 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947277 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

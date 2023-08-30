@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.game.events._events.respawn.fn();
+        Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.game.events._events.respawn.fn();
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/brawl/resetHealth.png?" + Date.now();
@@ -32,7 +32,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614825 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947221 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

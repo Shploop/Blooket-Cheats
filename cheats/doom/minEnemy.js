@@ -18,7 +18,7 @@
         document.body.append(i);
         window.alert = i.contentWindow.alert.bind(window);
         i.remove();
-        const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+        const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
         if (stateNode.state.phase !== 'select') alert('You must be on the attribute selection page!');
         else stateNode.setState({ enemyCard: { ...stateNode.state.enemyCard, strength: 0, charisma: 0, wisdom: 0 } });
     });
@@ -38,7 +38,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614892 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947316 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

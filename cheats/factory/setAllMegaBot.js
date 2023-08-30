@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({
+        Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({
             blooks: new Array(10).fill({
                 name: "Mega Bot",
                 color: "#d71f27",
@@ -45,7 +45,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614908 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947345 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

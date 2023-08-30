@@ -19,7 +19,7 @@
         window.prompt = i.contentWindow.prompt.bind(window);
         i.remove();
         let player = prompt("Who's gold would you like to reset?");
-        let { stateNode: { props, state } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+        let { stateNode: { props, state } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
         stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
             if (players && Object.keys(players).map(x=>x.toLowerCase()).includes(player.toLowerCase())) props.liveGameController.setVal({
                 path: "c/".concat(props.client.name),
@@ -47,7 +47,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354615019 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947465 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

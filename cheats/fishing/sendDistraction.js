@@ -18,7 +18,7 @@
         document.body.append(i);
         window.alert = i.contentWindow.alert.bind(window);
         i.remove();
-        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
         const f = ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"][Math.floor(Math.random() * 9)];
         stateNode.safe = true;
         stateNode.props.liveGameController.setVal({
@@ -46,7 +46,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614917 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947363 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

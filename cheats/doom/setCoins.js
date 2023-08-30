@@ -20,7 +20,7 @@
         i.remove();
         if (window.location.pathname == "/tower/battle") {
             let coins = parseInt("0" + alert("How many coins would you like?"));
-            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
             try {
                 stateNode.props.setTowerCoins(coins);
             } catch { }
@@ -42,7 +42,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354614896 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947322 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

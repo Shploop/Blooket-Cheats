@@ -72,7 +72,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    const { stateNode: { state: { question, stage, feedback }, props: { client: { question: pquestion } } } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                    const { stateNode: { state: { question, stage, feedback }, props: { client: { question: pquestion } } } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                     const q = (question || pquestion);
                                     try {
                                         if (q.qType != "typing") if (stage !== "feedback" && !feedback) [...document.querySelectorAll(`[class*="answerContainer"]`)][q.answers.map((x, i) => q.correctAnswers.includes(x) ? i : null).filter(x => x != null)[0]]?.click?.();
@@ -97,7 +97,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    const { stateNode: { state, props } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                    const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                     [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
                                         if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i])) answer.style.backgroundColor = "rgb(0, 207, 119)";
                                         else answer.style.backgroundColor = "rgb(189, 15, 38)";
@@ -114,7 +114,7 @@
                         name: "Auto Answer",
                         description: "Click the correct answer for you",
                         run: function () {
-                            const { stateNode: { state: { question, stage, feedback }, props: { client: { question: pquestion } } } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode: { state: { question, stage, feedback }, props: { client: { question: pquestion } } } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             try {
                                 if (question.qType != "typing") if (stage !== "feedback" && !feedback) [...document.querySelectorAll(`[class*="answerContainer"]`)][(question || pquestion).answers.map((x, i) => (question || pquestion).correctAnswers.includes(x) ? i : null).filter(x => x != null)[0]]?.click?.();
                                 else document.querySelector('[class*="feedback"]')?.firstChild?.click?.();
@@ -257,7 +257,7 @@
                             }
                         ],
                         run: function (blook) {
-                            let { props } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode;
+                            let { props } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode;
                             props.client.blook = blook;
                             props.liveGameController.setVal({ path: `c/${props.client.name}/b`, val: blook });
                         }
@@ -301,7 +301,7 @@
                         name: "Use Any Blook",
                         description: "Allows you to play as any blook",
                         run: function () {
-                            const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             const blooks = webpackJsonp.push([[], { ['1234']: (_, a, b) => { a.webpack = b } }, [['1234']]]).webpack("MDrD").a;
                             if (location.pathname == "/blooks") stateNode.setState({ blookData: Object.keys(blooks).reduce((a, b) => (a[b] = (stateNode.state.blookData[b] || 1), a), {}), allSets: Object.values(blooks).reduce((a, b) => (a.includes(b.set) ? a : a.concat(b.set)), []) });
                             else if (Array.isArray(stateNode.state.unlocks)) stateNode.setState({ unlocks: Object.keys(blooks) });
@@ -312,7 +312,7 @@
                         name: "Every Answer Correct",
                         description: "Sets every answer to be correct",
                         run: function () {
-                            const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.freeQuestions = stateNode.questions = stateNode.props.client.questions.map(x => ({ ...x, correctAnswers: x.answers }));
                         }
                     },
@@ -320,7 +320,7 @@
                         name: "Highlight Answers",
                         description: "Colors answers to be red or green highlighting the correct ones",
                         run: function () {
-                            const { stateNode: { state, props } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
                                 if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i])) answer.style.backgroundColor = "rgb(0, 207, 119)";
                                 else answer.style.backgroundColor = "rgb(189, 15, 38)";
@@ -343,7 +343,7 @@
                         name: "Remove Random Name",
                         description: "Allows you to put a custom name",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ isRandom: false, client: { name: "" } });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ isRandom: false, client: { name: "" } });
                             document.querySelector('[class*="nameInput"]')?.focus?.();
                         }
                     },
@@ -643,7 +643,7 @@
                                 }
                                 return function (box) {
                                     if (window.location.pathname !== "/market") return alert("This must be ran on the market page");
-                                    let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                    let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                     let packs = webpack('fGzD');
                                     packs = Object.keys(packs.a).reduce((obj, pack) => (obj.packs.includes(pack) && (obj.data[pack] = Object.fromEntries(packs.b(pack))), obj), { packs: Array.from(document.querySelectorAll('[class*="packShadow"]')).map(x => x.alt), data: {} }).data;
                                     if (packs[box]) {
@@ -943,7 +943,7 @@
                                     window.prompt = i.contentWindow.prompt.bind(window);
                                     i.remove();
                                     if (window.location.pathname == "/market") {
-                                        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                         stateNode.setState({
                                             loadingPack: false,
                                             openPack: true,
@@ -975,7 +975,7 @@
                         name: "Unlock Plus Gamemodes",
                         description: "Allows you to play any gamemode that is plus only",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState(state => (state.gameModes.forEach(gm => gm.plusOnly = false), state));
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState(state => (state.gameModes.forEach(gm => gm.plusOnly = false), state));
                         }
                     }
                 ],
@@ -988,7 +988,7 @@
                         name: "Double Enemy XP",
                         description: "Doubles enemy XP drop value",
                         run: function () {
-                            for (const collider of Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) {
+                            for (const collider of Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) {
                                 const enemies = collider.object2;
                                 let _start = enemies.classType.prototype.start;
                                 enemies.classType.prototype.start = function () { _start.apply(this, arguments), this.val *= 2 }
@@ -1000,7 +1000,7 @@
                         name: "Half Enemy Speed",
                         description: "Makes enemies move 2x slower",
                         run: function () {
-                            for (const collider of Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) {
+                            for (const collider of Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) {
                                 const enemies = collider.object2;
                                 let _start = enemies.classType.prototype.start;
                                 enemies.classType.prototype.start = function () { _start.apply(this, arguments), this.speed *= .5 }
@@ -1012,7 +1012,7 @@
                         name: "Instant Kill",
                         description: "Sets all enemies health to 1",
                         run: function () {
-                            for (const collider of Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) {
+                            for (const collider of Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) {
                                 const enemies = collider.object2;
                                 let _start = enemies.classType.prototype.start;
                                 enemies.classType.prototype.start = function () { _start.apply(this, arguments), this.hp = 1 }
@@ -1024,21 +1024,21 @@
                         name: "Invincibility",
                         description: "Makes you invincible",
                         run: function () {
-                            for (const collider of Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) collider.collideCallback = () => { };
+                            for (const collider of Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) collider.collideCallback = () => { };
                         }
                     },
                     {
                         name: "Magnet",
                         description: "Pulls all xp towards you",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.find(x => x.collideCallback?.toString().includes('magnetTime')).collideCallback({ active: true }, { active: true, setActive() { }, setVisible() { } });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.find(x => x.collideCallback?.toString().includes('magnetTime')).collideCallback({ active: true }, { active: true, setActive() { }, setVisible() { } });
                         }
                     },
                     {
                         name: "Max Current Abilities",
                         description: "Maxes out all your current abilities",
                         run: function () {
-                            const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             for (const [ability, level] of Object.entries(stateNode.state.abilities)) for (let i = 0; i < (10 - level); i++) stateNode.state.game.scene.game.events.emit("level up", ability, stateNode.state.abilities[ability]++);
                             stateNode.setState({
                                 level: stateNode.state.game.scene.level = [1, 3, 5, 10, 15, 25, 35].sort((a, b) => Math.abs(a - stateNode.state.level) - Math.abs(b - stateNode.state.level))[0] - 1
@@ -1049,7 +1049,7 @@
                         name: "Next Level",
                         description: "Skips to the next level",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             let { object1: player, object2: xp } = stateNode.state.game.scene.physics.world.colliders._active.find(x => x.collideCallback?.toString().includes('emit("xp"'));
                             xp.get().spawn(player.x, player.y, ((e) => 1 === e ? 1 : e < 5 ? 5 : e < 10 ? 10 : e < 20 ? 20 : e < 30 ? 30 : e < 40 ? 40 : e < 50 ? 50 : 100)(stateNode.state.level) - stateNode.xp);
                         }
@@ -1058,7 +1058,7 @@
                         name: "Remove Obstacles",
                         description: "Removes all rocks and obstacles",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.bodies.entries.forEach(body => {
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.physics.world.bodies.entries.forEach(body => {
                                 try {
                                     if (body.gameObject.frame.texture.key.includes("obstacle")) body.gameObject.destroy();
                                 } catch { }
@@ -1069,14 +1069,14 @@
                         name: "Kill Enemies",
                         description: "Kills all current enemies",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.bodies.entries.forEach(x => x?.gameObject?.receiveDamage?.(x.gameObject.hp, 1));
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.physics.world.bodies.entries.forEach(x => x?.gameObject?.receiveDamage?.(x.gameObject.hp, 1));
                         }
                     },
                     {
                         name: "Reset Health",
                         description: "Resets health and gives invincibility for 3 seconds",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.game.events._events.respawn.fn();
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.game.scene.game.events._events.respawn.fn();
                         }
                     }
                 ],
@@ -1096,7 +1096,7 @@
                             i.remove();
                             if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
                             else {
-                                const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 stateNode.setState({ items: Object.fromEntries(Object.entries(stateNode.state.items).map(x => [x[0], 5])) });
                             }
                         }
@@ -1105,7 +1105,7 @@
                         name: "Remove Customers",
                         description: "Skips the current customers (Not usable in the shop)",
                         run: function () {
-                            const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.state.customers.forEach((customer, i) => Object.keys(customer).length && stateNode.removeCustomer(i, true));
                         }
                     },
@@ -1119,7 +1119,7 @@
                             i.remove();
                             if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
                             else {
-                                const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 stateNode.setState({ abilities: Object.fromEntries(Object.entries(stateNode.state.abilities).map(x => [x[0], 5])) });
                             }
                         }
@@ -1132,7 +1132,7 @@
                             type: "number"
                         }],
                         run: function (cafeCash) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ cafeCash });
                             stateNode.props.liveGameController.setVal({
                                 path: `c/${stateNode.props.client.name}`,
@@ -1153,7 +1153,7 @@
                             i.remove();
                             if (window.location.pathname !== "/cafe") alert("This can't be run in the shop");
                             else {
-                                const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 stateNode.setState({ foods: stateNode.state.foods.map(e => ({ ...e, stock: 99, level: 5 })) });
                             }
                         }
@@ -1174,7 +1174,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                    let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                     let { text } = stateNode.state.choices[0];
                                     let chest = document.querySelector('[class^=styles__feedbackContainer___]');
                                     if (chest.children.length <= 4) {
@@ -1206,7 +1206,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    let { state } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode;
+                                    let { state } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode;
                                     if (state.stage == "hack") [...document.querySelector('div[class^=styles__buttonContainer]').children].forEach(button => {
                                         if (button.innerText == state.correctPassword) return;
                                         button.style.outlineColor = "rgba(255, 64, 64, 0.8)";
@@ -1230,7 +1230,7 @@
                         run: function () {
                             if (!this.enabled) {
                                 this.enabled = true;
-                                this.data = setInterval(() => Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ choices: [{ type: "mult", val: 3, rate: .075, blook: "Brainy Bot", text: "Triple Crypto" }] }), 50);
+                                this.data = setInterval(() => Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ choices: [{ type: "mult", val: 3, rate: .075, blook: "Brainy Bot", text: "Triple Crypto" }] }), 50);
                             } else {
                                 this.enabled = false;
                                 clearInterval(this.data);
@@ -1248,7 +1248,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    let { state } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode;
+                                    let { state } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode;
                                     if (state.stage == "hack") for (const button of document.querySelector('div[class^=styles__buttonContainer]').children) button.innerText == state.correctPassword && button.click();
                                 }, 50);
                             } else {
@@ -1262,7 +1262,7 @@
                         name: "Remove Hack",
                         description: "Removes an attacking hack",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ hack: "" });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ hack: "" });
                         }
                     },
                     {
@@ -1273,7 +1273,7 @@
                             type: "number"
                         }],
                         run: function (amount) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ crypto: amount, crypto2: amount });
                             stateNode.props.liveGameController.setVal({
                                 path: "c/".concat(stateNode.props.client.name),
@@ -1293,7 +1293,7 @@
                             type: "string"
                         }],
                         run: function (password) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ password });
                             stateNode.props.liveGameController.setVal({
                                 path: "c/".concat(stateNode.props.client.name),
@@ -1312,12 +1312,12 @@
                             name: "Player",
                             type: "options",
                             options: () => {
-                                let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 return new Promise(res => stateNode.props.liveGameController?._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
                             }
                         }],
                         run: function (target) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
                                 if (players && Object.keys(players).map(x => x.toLowerCase()).includes(target.toLowerCase())) {
                                     let [player, { cr }] = Object.entries(players).find(([name]) => name.toLowerCase() == target.toLowerCase());
@@ -1345,7 +1345,7 @@
                         name: "Earthquake",
                         description: "Shuffles around towers",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({
                                 eventName: "Earthquake",
                                 event: {
@@ -1371,7 +1371,7 @@
                         name: "Max Tower Stats",
                         description: "Makes all placed towers overpowered",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.towers.forEach(tower => {
                                 tower.range = 100;
                                 tower.fullCd = tower.cd = 0;
@@ -1383,7 +1383,7 @@
                         name: "Remove Ducks",
                         description: "Removes ducks",
                         run: function () {
-                            let { stateNode: { ducks, tiles } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode: { ducks, tiles } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             ducks.forEach(x => { tiles[x.y][x.x] = 0; });
                             ducks.length = 0;
                         }
@@ -1392,7 +1392,7 @@
                         name: "Remove Enemies",
                         description: "Removes all the enemies",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.enemies = stateNode.futureEnemies = [];
                         }
                     },
@@ -1400,7 +1400,7 @@
                         name: "Remove Obstacles",
                         description: "Lets you place towers anywhere",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.tiles = stateNode.tiles.map(row => row.fill(0));
                         }
                     },
@@ -1412,7 +1412,7 @@
                             type: "number"
                         }],
                         run: function (dmg) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.dmg = dmg;
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.dmg = dmg;
                         }
                     },
                     {
@@ -1423,7 +1423,7 @@
                             type: "number"
                         }],
                         run: function (round) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ round });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ round });
                         }
                     },
                     {
@@ -1434,7 +1434,7 @@
                             type: "number"
                         }],
                         run: function (tokens) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ tokens });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ tokens });
                         }
                     }
                 ],
@@ -1448,7 +1448,7 @@
                         name: "Max Tower Stats",
                         description: "Makes all placed towers overpowered",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.towers.forEach(tower => {
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.towers.forEach(tower => {
                                 tower.stats.dmg = 1e6;
                                 tower.stats.fireRate = 50;
                                 tower.stats.ghostDetect = true;
@@ -1463,7 +1463,7 @@
                         name: "Kill Enemies",
                         description: "Kills all the enemies",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.state.game.scene.enemyQueue.length = 0;
                             stateNode.state.game.scene.physics.world.bodies.entries.forEach(x => x?.gameObject?.receiveDamage?.(x.gameObject.hp, 1));
                         }
@@ -1476,7 +1476,7 @@
                             type: "number"
                         }],
                         run: function (coins) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ coins });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ coins });
                         }
                     },
                     {
@@ -1487,7 +1487,7 @@
                             type: "number"
                         }],
                         run: function (health) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ health });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ health });
                         }
                     },
                     {
@@ -1498,7 +1498,7 @@
                             type: "number"
                         }],
                         run: function (round) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ round });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ round });
                         }
                     },
                 ],
@@ -1524,7 +1524,7 @@
                                         return () => func([{ type: "fossil", val: 10, rate: .1, blook: "Amber" }, { type: "fossil", val: 25, rate: .1, blook: "Dino Egg" }, { type: "fossil", val: 50, rate: .175, blook: "Dino Fossil" }, { type: "fossil", val: 75, rate: .175, blook: "Stegosaurus" }, { type: "fossil", val: 100, rate: .15, blook: "Velociraptor" }, { type: "fossil", val: 125, rate: .125, blook: "Brontosaurus" }, { type: "fossil", val: 250, rate: .075, blook: "Triceratops" }, { type: "fossil", val: 500, rate: .025, blook: "Tyrannosaurus Rex" }, { type: "mult", val: 1.5, rate: .05 }, { type: "mult", val: 2, rate: .025 }], 3);
                                     })();
                                     try {
-                                        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                         if (stateNode.state.stage === "excavate") {
                                             stateNode.state.choices.length || (stateNode.state.choices = getFossils());
                                             let max = 0, index = -1;
@@ -1555,7 +1555,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                    let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                     const rocks = [...document.querySelector('[class*="rockButton"]').parentElement.children];
                                     if (!rocks.every(element => element.querySelector('div'))) stateNode.setState({
                                         choices: [{ type: "fossil", val: 10, rate: .1, blook: "Amber" }, { type: "fossil", val: 25, rate: .1, blook: "Dino Egg" }, { type: "fossil", val: 50, rate: .175, blook: "Dino Fossil" }, { type: "fossil", val: 75, rate: .175, blook: "Stegosaurus" }, { type: "fossil", val: 100, rate: .15, blook: "Velociraptor" }, { type: "fossil", val: 125, rate: .125, blook: "Brontosaurus" }, { type: "fossil", val: 250, rate: .075, blook: "Triceratops" }, { type: "fossil", val: 500, rate: .025, blook: "Tyrannosaurus Rex" }, { type: "mult", val: 1.5, rate: .05 }, { type: "mult", val: 2, rate: .025 }].sort(() => 0.5 - Math.random()).slice(0, 3)
@@ -1590,7 +1590,7 @@
                             type: "number"
                         }],
                         run: function (fossils) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ fossils });
                             stateNode.props.liveGameController.setVal({
                                 path: `c/${stateNode.props.client.name}`,
@@ -1610,7 +1610,7 @@
                             type: "number"
                         }],
                         run: function (fossilMult) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ fossilMult });
                         }
                     },
@@ -1618,7 +1618,7 @@
                         name: "Stop Cheating",
                         description: "Undoes cheating so that you can't be caught",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ isCheating: false });
                             stateNode.props.liveGameController.setVal({
                                 path: `c/${stateNode.props.client.name}/ic`,
@@ -1642,7 +1642,7 @@
                             i.remove();
                             if (window.location.pathname == "/tower/map") {
                                 const { a: artifacts, c: allCards } = webpackJsonp.push([[], { ['']: (_, a, b) => { a.cache = b.c }, }, [['']],]).cache["gvfT"].exports;
-                                const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 stateNode.props.tower.artifacts = Object.keys(artifacts);
                                 stateNode.props.tower.cards = Object.entries(allCards).map(([blook, card]) => ({ ...card, blook, strength: 20, charisma: 20, wisdom: 20 }));
                                 try { stateNode.props.addTowerNode(); } catch { };
@@ -1659,7 +1659,7 @@
                             window.alert = i.contentWindow.alert.bind(window);
                             i.remove();
                             if (window.location.pathname == "/tower/map") {
-                                const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 stateNode.props.tower.cards.forEach(card => {
                                     card.strength = 20;
                                     card.charisma = 20;
@@ -1676,7 +1676,7 @@
                             document.body.append(i);
                             window.alert = i.contentWindow.alert.bind(window);
                             i.remove();
-                            if (window.location.pathname == "/tower/battle") Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ myHealth: 100 });
+                            if (window.location.pathname == "/tower/battle") Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ myHealth: 100 });
                             else alert("You need to be in battle to run this cheat!");
                         }
                     },
@@ -1688,7 +1688,7 @@
                             document.body.append(i);
                             window.alert = i.contentWindow.alert.bind(window);
                             i.remove();
-                            const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             if (stateNode.state.phase !== 'select') alert('You must be on the attribute selection page!');
                             else stateNode.setState({ myCard: { ...stateNode.state.myCard, strength: 20, charisma: 20, wisdom: 20 } });
                         }
@@ -1701,7 +1701,7 @@
                             document.body.append(i);
                             window.alert = i.contentWindow.alert.bind(window);
                             i.remove();
-                            const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             if (stateNode.state.phase !== 'select') alert('You must be on the attribute selection page!');
                             else stateNode.setState({ enemyCard: { ...stateNode.state.enemyCard, strength: 0, charisma: 0, wisdom: 0 } });
                         }
@@ -1720,7 +1720,7 @@
                             i.remove();
                             if (window.location.pathname == "/tower/battle") {
                                 let coins = parseInt("0" + alert("How many coins would you like?"));
-                                let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 try { stateNode.props.setTowerCoins(coins); } catch { };
                             } else alert("You need to be in battle to run this cheat!");
                         }
@@ -1744,7 +1744,7 @@
                             document.body.append(i);
                             window.alert = i.contentWindow.alert.bind(window);
                             i.remove();
-                            const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             if (stateNode.state.blooks.length >= 10) alert("Choose a blook to replace");
                             stateNode.chooseBlook(JSON.parse(blook));
                         }
@@ -1753,7 +1753,7 @@
                         name: "Free Upgrades",
                         description: "Sets upgrade prices to 0 for all current blooks",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState(state => ({ ...state, blooks: state.blooks.map(blook => ({ ...blook, price: [0, 0, 0, 0] })) }));
                         }
                     },
@@ -1761,14 +1761,14 @@
                         name: "Max Blooks",
                         description: "Maxes out all your blooks' levels",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.blooks.forEach(blook => blook.level = 4);
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.blooks.forEach(blook => blook.level = 4);
                         }
                     },
                     {
                         name: "Remove Glitches",
                         description: "Removes all enemy glitches",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({
                                 bits: 0,
                                 ads: [],
@@ -1802,7 +1802,7 @@
                             options: Object.entries({ lb: "Lunch Break", as: "Ad Spam", e37: "Error 37", nt: "Night Time", lo: "#LOL", j: "Jokester", sm: "Slow Mo", dp: "Dance Party", v: "Vortex", r: "Reverse", f: "Flip", m: "Micro" }).map(([value, name]) => ({ name, value }))
                         }],
                         run: function (val) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.safe = true;
                             stateNode.props.liveGameController.setVal({ path: `c/${stateNode.props.client.name}/tat`, val });
                         }
@@ -1811,7 +1811,7 @@
                         name: "Set All MegaBot",
                         description: "Sets all your blooks to maxed out Mega Bots",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({
                                 blooks: new Array(10).fill({
                                     name: "Mega Bot",
                                     color: "#d71f27",
@@ -1835,7 +1835,7 @@
                             type: "number"
                         }],
                         run: function (cash) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ cash });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ cash });
                         }
                     }
                 ],
@@ -1848,7 +1848,7 @@
                         name: "Frenzy",
                         description: "Sets everyone to frenzy mode",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.props.liveGameController.setVal({
                                 path: `c/${stateNode.props.client.name}`,
                                 val: {
@@ -1870,7 +1870,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ party: "" });
+                                    Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ party: "" });
                                 }, 50);
                             } else {
                                 this.enabled = false;
@@ -1892,7 +1892,7 @@
                             document.body.append(i);
                             window.alert = i.contentWindow.alert.bind(window);
                             i.remove();
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.safe = true;
                             stateNode.props.liveGameController.setVal({
                                 path: `c/${stateNode.props.client.name}`,
@@ -1913,7 +1913,7 @@
                             max: 5
                         }],
                         run: function (lure) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ lure: Math.max(Math.min(lure - 1, 4), 0) });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ lure: Math.max(Math.min(lure - 1, 4), 0) });
                         }
                     },
                     {
@@ -1924,7 +1924,7 @@
                             type: "number"
                         }],
                         run: function (weight) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ weight, weight2: weight });
                             stateNode.props.liveGameController.setVal({
                                 path: `c/${stateNode.props.client.name}`,
@@ -1976,7 +1976,7 @@
                         enabled: false,
                         data: null,
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode._choosePrize ||= stateNode.choosePrize;
                             if (!this.enabled) {
                                 this.enabled = true;
@@ -2005,7 +2005,7 @@
                                 this.enabled = true;
                                 this.data = setInterval(async () => {
                                     try {
-                                        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                         if (stateNode.state.stage === "prize") {
                                             const players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", c => c && r(c))) || []).filter(x => x[0] != stateNode.props.client.name).sort((a, b) => b[1].g - a[1].g)[0]?.[1]?.g || 0;
                                             let max = 0; index = -1;
@@ -2043,7 +2043,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.choices.forEach(({ text }, index) => {
+                                    Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state.choices.forEach(({ text }, index) => {
                                         let chest = document.querySelector(`div[class^='styles__choice${index + 1}']`);
                                         if (!chest || chest.querySelector('div')) return;
                                         let choice = document.createElement('div');
@@ -2071,12 +2071,12 @@
                             name: "Player",
                             type: "options",
                             options: () => {
-                                let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 return new Promise(res => stateNode.props.liveGameController?._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
                             }
                         }],
                         run: function (target) {
-                            let { stateNode: { props, state } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode: { props, state } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             props.liveGameController.setVal({
                                 path: "c/".concat(props.client.name),
                                 val: {
@@ -2095,7 +2095,7 @@
                             type: "number"
                         }],
                         run: function (gold) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ gold, gold2: gold });
                             stateNode.props.liveGameController.setVal({
                                 path: "c/".concat(stateNode.props.client.name),
@@ -2113,12 +2113,12 @@
                             name: "Player",
                             type: "options",
                             options: () => {
-                                let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 return new Promise(res => stateNode.props.liveGameController?._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
                             }
                         }],
                         run: function (target) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
                                 if (!players?.[target]) return;
                                 let { g } = players[target];
@@ -2142,7 +2142,7 @@
                             document.body.append(i);
                             window.alert = i.contentWindow.alert.bind(window);
                             i.remove();
-                            let { stateNode: { props, state } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode: { props, state } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             let count = 0;
                             props.liveGameController.getDatabaseVal("c", async (players) => {
                                 if (players) for (const player of Object.keys(players)) {
@@ -2179,7 +2179,7 @@
                                 let stats = ['materials', 'people', 'happiness', 'gold'];
                                 let elements = Object.fromEntries([...document.querySelectorAll('[class^=styles__statContainer]')].map((container, i) => [stats[i], container]));
                                 this.data = setInterval(() => {
-                                    let { guest: data, phase } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state;
+                                    let { guest: data, phase } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state;
                                     if (phase == "choice") {
                                         Array.from(document.getElementsByClassName('choiceESP')).forEach(x => x.remove());
                                         Object.entries(data.yes || {}).forEach(x => {
@@ -2212,14 +2212,14 @@
                         name: "Disable Tax Toucan",
                         description: "Tax evasion",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.taxCounter = Number.MAX_VALUE;
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.taxCounter = Number.MAX_VALUE;
                         }
                     },
                     {
                         name: "Max Stats",
                         description: "Sets all resources to the max",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ materials: 100, people: 100, happiness: 100, gold: 100 });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ materials: 100, people: 100, happiness: 100, gold: 100 });
                         }
                     },
                     {
@@ -2230,14 +2230,14 @@
                             type: "number"
                         }],
                         run: function (guestScore) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ guestScore });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ guestScore });
                         }
                     },
                     {
                         name: "Skip Guest",
                         description: "Skips the current guest",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.nextGuest();
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.nextGuest();
                         }
                     }
                 ],
@@ -2249,7 +2249,7 @@
                     name: "Instant Win",
                     description: "Instantly Wins the race",
                     run: function () {
-                        const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                        const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                         stateNode.setState({ progress: stateNode.state.goalAmount }, () => {
                             const { state: { question } } = stateNode;
                             try {
@@ -2273,7 +2273,7 @@
                             if (!this.enabled) {
                                 this.enabled = true;
                                 this.data = setInterval(() => {
-                                    let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                    let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                     stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
                                 }, 50);
                             } else {
@@ -2287,7 +2287,7 @@
                         name: "Auto Answer",
                         description: "Chooses the correct answer for you",
                         run: function () {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
                         }
                     },
@@ -2305,7 +2305,7 @@
                             type: "number"
                         }],
                         run: function (numBlooks) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ numBlooks });
                             stateNode.isTeam ? stateNode.props.liveGameController.setVal({
                                 path: `a/${stateNode.props.client.name}/bs`,
@@ -2326,7 +2326,7 @@
                         }],
                         run: function (defense) {
                             let numDefense = Math.min(defense, 4);
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ numDefense });
                             stateNode.isTeam ? stateNode.props.liveGameController.setVal({
                                 path: `a/${stateNode.props.client.name}/d`,
@@ -2347,7 +2347,7 @@
                         name: "Remove Distractions",
                         description: "Removes all enemy distractions",
                         run: function () {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ fog: !1, dusk: !1, wind: !1, plow: !1, blizzard: !1, force: !1, canada: !1, trees: [!1, !1, !1, !1, !1, !1, !1, !1, !1, !1] });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ fog: !1, dusk: !1, wind: !1, plow: !1, blizzard: !1, force: !1, canada: !1, trees: [!1, !1, !1, !1, !1, !1, !1, !1, !1, !1] });
                         }
                     },
                     {
@@ -2359,7 +2359,7 @@
                             options: Object.entries({ c: "Oh Canada", b: "Blizzard", f: "Fog Spell", d: "Dark & Dusk", w: "Howling Wind", g: "Gift Time!", t: "TREES", s: "Snow Plow", fr: "Use The Force" }).map(([value, name]) => ({ name, value }))
                         }],
                         run: function (val) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.safe = true;
                             stateNode.props.liveGameController.setVal({ path: `c/${stateNode.props.client.name}/tat`, val });
                         }
@@ -2372,7 +2372,7 @@
                             type: "number"
                         }],
                         run: function (toys) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.setState({ toys });
                             stateNode.props.liveGameController.setVal({
                                 path: "c/".concat(stateNode.props.client.name),
@@ -2391,7 +2391,7 @@
                             type: "number"
                         }],
                         run: function (toysPerQ) {
-                            Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ toysPerQ });
+                            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ toysPerQ });
                         }
                     },
                     {
@@ -2401,12 +2401,12 @@
                             name: "Player",
                             type: "options",
                             options: () => {
-                                let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                                 return new Promise(res => stateNode.props.liveGameController?._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
                             }
                         }],
                         run: function (target) {
-                            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
                                 if (players && Object.keys(players).map(x => x.toLowerCase()).includes(target.toLowerCase())) {
                                     let [player, { t: toys }] = Object.entries(players).find(([name]) => name.toLowerCase() == target.toLowerCase());
@@ -2910,7 +2910,7 @@
                 data: {},
                 async connect() {
                     try {
-                        const { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
+                        const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                         if (!stateNode?.props?.liveGameController?._liveGameCode) return false;
                         Cheats.alerts.connection = await stateNode.props.liveGameController.getDatabaseRef("c");
                         const blooks = Cheats.alerts.blookData;
@@ -3535,7 +3535,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354615149 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947556 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

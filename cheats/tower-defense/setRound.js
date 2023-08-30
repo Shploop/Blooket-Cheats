@@ -18,7 +18,7 @@
         document.body.append(i);
         window.prompt = i.contentWindow.prompt.bind(window);
         i.remove();
-        Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState({ round: Number(parseInt(prompt("What round do you want to set to?"))) })
+        Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ round: Number(parseInt(prompt("What round do you want to set to?"))) })
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/tower-defense/setRound.png?" + Date.now();
@@ -36,7 +36,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693354615210 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693429947620 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
