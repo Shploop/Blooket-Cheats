@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner.stateNode.setState(state => (state.gameModes.forEach(gm => gm.plusOnly = false), state));
+        Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.setState(state => (state.gameModes.forEach(gm => gm.plusOnly = false), state));
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/global/unlockPlusGamemodes.png?" + Date.now();
@@ -32,7 +32,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656146073 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354615005 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

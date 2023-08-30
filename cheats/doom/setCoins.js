@@ -20,7 +20,7 @@
         i.remove();
         if (window.location.pathname == "/tower/battle") {
             let coins = parseInt("0" + alert("How many coins would you like?"));
-            let { stateNode } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
             try {
                 stateNode.props.setTowerCoins(coins);
             } catch { }
@@ -42,7 +42,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656145903 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354614896 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

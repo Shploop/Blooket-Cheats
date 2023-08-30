@@ -19,7 +19,7 @@
         window.prompt = i.contentWindow.prompt.bind(window);
         i.remove();
         let fossils = Number(parseInt(prompt("How many fossils would you like?")));
-        let { stateNode } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
         stateNode.setState({ fossils });
         stateNode.props.liveGameController.setVal({
             path: `c/${stateNode.props.client.name}`,
@@ -46,7 +46,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656145860 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354614872 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

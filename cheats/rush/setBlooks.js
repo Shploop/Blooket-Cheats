@@ -19,7 +19,7 @@
         window.prompt = i.contentWindow.prompt.bind(window);
         i.remove();
         let numBlooks = Number(parseInt(prompt("How many blooks do you want?")));
-        let { stateNode } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
         stateNode.setState({ numBlooks });
         stateNode.isTeam ? stateNode.props.liveGameController.setVal({
             path: `a/${stateNode.props.client.name}/bs`,
@@ -45,7 +45,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656146189 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354615160 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

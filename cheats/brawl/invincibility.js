@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        for (const collider of Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) collider.collideCallback = () => { };
+        for (const collider of Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.game.scene.physics.world.colliders._active.filter(x => x.callbackContext?.toString().includes('invulnerableTime'))) collider.collideCallback = () => { };
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/brawl/invincibility.png?" + Date.now();
@@ -32,7 +32,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656145756 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354614810 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

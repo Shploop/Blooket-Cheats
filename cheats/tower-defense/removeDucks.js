@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        let { stateNode: { ducks, tiles } } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+        let { stateNode: { ducks, tiles } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
         ducks.forEach(x => { tiles[x.y][x.x] = 0; });
         ducks.length = 0;
     });
@@ -34,7 +34,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656146210 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354615201 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

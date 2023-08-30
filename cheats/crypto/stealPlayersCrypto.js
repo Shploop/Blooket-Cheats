@@ -19,7 +19,7 @@
         window.prompt = i.contentWindow.prompt.bind(window);
         i.remove();
         let target = prompt("Who's crypto would you like to steal?");
-        let { stateNode } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
         stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
             if (players && Object.keys(players).map(x => x.toLowerCase()).includes(target.toLowerCase())) {
                 let [player, { cr }] = Object.entries(players).find(([name]) => name.toLowerCase() == target.toLowerCase());
@@ -57,7 +57,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656145847 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354614863 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

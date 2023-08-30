@@ -25,7 +25,7 @@
                 blooks = values.find(x => x.exports?.a?.Chick?.set).exports.a,
                 packs = values.find(x => x.exports.a?.Breakfast).exports.a,
                 allBlooks = Object.entries(blooks).reduce((a, [b, c]) => (packs[c.realSet || c.set] && (a[b] = c), a), {});
-            let { stateNode } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+            let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
             let phaser = Object.values(webpack.c).find(x => x.exports?.Class).exports;
             let L = new function e() { this.scene = null, this.particles = null, this.rarity = null };
         
@@ -298,7 +298,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656146065 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354615000 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

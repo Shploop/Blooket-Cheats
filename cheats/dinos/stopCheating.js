@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        let { stateNode } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
         stateNode.setState({ isCheating: false });
         stateNode.props.liveGameController.setVal({
             path: `c/${stateNode.props.client.name}/ic`,
@@ -37,7 +37,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656145868 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354614878 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

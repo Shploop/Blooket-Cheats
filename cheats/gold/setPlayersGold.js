@@ -20,7 +20,7 @@
         i.remove();
         let player = prompt("Who's gold would you like to set?");
         let gold = parseInt(prompt("How much gold would you like to set?"));
-        let { stateNode: { props, state } } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+        let { stateNode: { props, state } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
         
         let { webpack } = webpackJsonp.push([[], { ['1234']: (_, a, b) => { a.webpack = b }, }, [['1234']]]);
         const axios = Object.values(webpack.c).find((x) => x.exports?.a?.get).exports.a;
@@ -69,7 +69,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656146105 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354615026 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

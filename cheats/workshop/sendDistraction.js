@@ -18,7 +18,7 @@
         document.body.append(i);
         window.alert = i.contentWindow.alert.bind(window);
         i.remove();
-        let { stateNode } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+        let { stateNode } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
         let distractions = { c: "Oh Canada", b: "Blizzard", f: "Fog Spell", d: "Dark & Dusk", w: "Howling Wind", g: "Gift Time!", t: "TREES", s: "Snow Plow", fr: "Use The Force" };
         let val = Object.keys(distractions)[Math.floor(Math.random() * Object.keys(distractions).length)];
         stateNode.safe = true;
@@ -41,7 +41,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656146275 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354615255 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

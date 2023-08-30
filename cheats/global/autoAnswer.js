@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        const { stateNode: { state: { question, stage, feedback }, props: { client: { question: pquestion } } } } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner;
+        const { stateNode: { state: { question, stage, feedback }, props: { client: { question: pquestion } } } } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner;
         try {
             if (question.qType != "typing") if (stage !== "feedback" && !feedback) [...document.querySelectorAll(`[class*="answerContainer"]`)][(question || pquestion).answers.map((x, i) => (question || pquestion).correctAnswers.includes(x) ? i : null).filter(x => x != null)[0]]?.click?.();
             else document.querySelector('[class*="feedback"]')?.firstChild?.click?.();
@@ -37,7 +37,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656145973 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354614934 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

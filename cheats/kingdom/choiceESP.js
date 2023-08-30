@@ -16,7 +16,7 @@
     const cheat = (async () => {
         let stats = ['materials', 'people', 'happiness', 'gold'];
         let elements = Object.fromEntries([...document.querySelectorAll('[class^=styles__statContainer]')].map((container, i) => [stats[i], container]));
-        let { guest: data, phase } = Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner.stateNode.state;
+        let { guest: data, phase } = Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state;
         if (phase == "choice") {
             Array.from(document.getElementsByClassName('choiceESP')).forEach(x => x.remove());
             Object.entries(data.yes || {}).forEach(x => {
@@ -53,7 +53,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656146122 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354615041 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

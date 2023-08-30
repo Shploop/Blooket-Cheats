@@ -14,7 +14,7 @@
 
 (() => {
     const cheat = (async () => {
-        Object.values(document.querySelector('body div[class*="camelCase"]'))[1].children[0]._owner.stateNode.state.towers.forEach(tower => {
+        Object.values(document.querySelector("[class*='camelCase']").parentElement)[1].children[0]._owner.stateNode.state.towers.forEach(tower => {
             tower.stats.dmg = 1e6;
             tower.stats.fireRate = 50;
             tower.stats.ghostDetect = true;
@@ -40,7 +40,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1692656146244 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1693354615215 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
