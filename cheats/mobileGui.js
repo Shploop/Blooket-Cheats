@@ -2469,7 +2469,7 @@
                 case "/play/rush":
                     return capitalize ? "Blook Rush" : "rush";
                 case "/play/dino":
-                    return capitalize ? "Deceptive Dinos" : "dino";
+                    return capitalize ? "Deceptive Dinos" : "dinos";
                 case "/tower/map":
                 case "/tower/battle":
                 case "/tower/rest":
@@ -2511,7 +2511,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693429947539 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1694126388262 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
