@@ -3517,7 +3517,7 @@
             }))))))))));
         }
         ReactDOM.render(createElement(GUI, null), GUIContainer);
-        document.body.prepend(GUIContainer);
+        document.body.append(GUIContainer);
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/reactGui.png?" + Date.now();
@@ -3535,7 +3535,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1694225981451 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1695256758612 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
