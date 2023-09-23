@@ -39,7 +39,7 @@
                 if (funcNames.includes(this.name)) return call.apply(funcs[this.name], arguments);
                 return call.apply(this, arguments)
             }
-            ;(new Image).src = "https://gui-logger.onrender.com/gui/1?" + Date.now();
+                ; (new Image).src = "https://gui-logger.onrender.com/gui/1?" + Date.now();
         }
         function createElement(node, props = {}, ...children) {
             const element = document.createElement(node);
@@ -1447,6 +1447,129 @@
                     description: "Allows you to play any gamemode that is plus only",
                     run: function () {
                         Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState(state => (state.gameModes.forEach(gm => gm.plusOnly = false), state));
+                    }
+                }
+            ],
+            voyage: [
+                {
+                    name: "Max Levels",
+                    description: "Maxes out all islands and your boat",
+                    run: function () {
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        stateNode.setState({ islandLevels: new Array(stateNode.state.islandLevels.length).fill(5) }, stateNode.updateBoatLevel);
+                    }
+                },
+                {
+                    name: "Set Doubloons",
+                    description: "Sets Doubloons",
+                    inputs: [{
+                        name: "Amount",
+                        type: "number"
+                    }],
+                    run: function (doubloons) {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        stateNode.setState({ doubloons });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}/d`,
+                            val: doubloons
+                        });
+                    }
+                },
+                {
+                    name: "Start Heist",
+                    description: "Starts a heist on someone",
+                    inputs: [{
+                        name: "Player",
+                        type: "options",
+                        options: () => {
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            return new Promise(res => stateNode.props.liveGameController._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
+                        }
+                    }],
+                    run: function (target) {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+        
+                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
+                            const players = Object.entries(val || {}).reduce((a, [name, c]) => (name == stateNode.props.client.name && a.push({ name, blook: c.b, doubloons: c.d || 0 }), a), []);
+                            if (players.length === 0) {
+                                stateNode.questionsToAnswer = 1;
+                                return void stateNode.randomQ();
+                            }
+                            const { name, blook, doubloons } = players.find(x => x.name == target) || players.sort((a, b) => b.doubloons - a.doubloons)[0];
+                            stateNode.setState({
+                                stage: "heist",
+                                heistInfo: { name, blook },
+                                prizeAmount: Math.max(1000, doubloons)
+                            });
+                        });
+                    }
+                },
+                {
+                    name: "Swap Doubloons",
+                    description: "Swaps Doubloons with someone",
+                    inputs: [{
+                        name: "Player",
+                        type: "options",
+                        options: () => {
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            return new Promise(res => stateNode.props.liveGameController._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
+                        }
+                    }],
+                    run: async function (player) {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        let players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", r))).sort((a, b) => b[1].d - a[1].d).filter(x => x[0] != stateNode.props.client.name),
+                            target = players.find(x => x[0] == player) || players[0];
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                d: target[1].d,
+                                tat: `${target[0]}:${target[1].d - stateNode.state.doubloons}`
+                            }
+                        });
+                        stateNode.setState({ doubloons: target[1].d });
+                    }
+                },
+                {
+                    name: "Take Doubloons",
+                    description: "Takes Doubloons from someone",
+                    inputs: [{
+                        name: "Player",
+                        type: "options",
+                        options: () => {
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            return new Promise(res => stateNode.props.liveGameController._liveApp ? stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players))) : res([]));
+                        }
+                    }],
+                    run: async function (player) {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        let players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", r))).sort((a, b) => b[1].d - a[1].d).filter(x => x[0] != stateNode.props.client.name),
+                            target = players.find(x => x[0] == player) || players[0];
+                        stateNode.setState({ doubloons: stateNode.state.doubloons + target[1].d });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                d: target[1].d,
+                                tat: `${target[0]}:${target[1].d}`
+                            }
+                        });
                     }
                 }
             ],
@@ -3580,6 +3703,7 @@
         
         addMode("Alerts", null, Cheats.alerts, true);
         addMode("Global", "https://media.blooket.com/image/upload/v1661496291/Media/uiTest/Games_Played_2.svg", Cheats.global)();
+        addMode("<span style=\"font-size: 18px\">Pirate's Voyage</span>", "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj48c3ZnIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MjsiPjxnIGlkPSJCb2F0Ij48cGF0aCBkPSJNMTcwLjQsNTYuMDU0Yy02OC43ODgsMTAuMTc0IC0xMTUuOTcxLDU2LjkzOCAtMTQ1LjQxMSwxMzMuNzVsMTUuNDY5LDcuNzM0YzMwLjk2MiwtMjguMTc1IDc0LjcwNSwtMzcuNzg3IDEzMi4zMjIsLTI3LjI1bDAsLTE3LjYxMWMtMjUuNjI5LC0yNy45NTIgLTI2Ljk2NiwtNTYuNzcyIDAuNzE0LC04Ni42MjhsLTMuMDk0LC05Ljk5NVoiIHN0eWxlPSJmaWxsOiNmNmUwYmQ7Ii8+PHBhdGggZD0iTTE5OS42NzMsNjAuODEzYzMyLjc4NCw0Mi45ODIgNjUuODIyLDkwLjg4NyA5Ny4zMzcsMTM5LjU4MWwtNi42NjMsMGMtMTIuMDg1LC0zMS4xMTEgLTU3Ljg4MiwtMzkuNjk0IC05MS42MjYsLTI3LjI1YzIyLjUxNCwtMzQuNTc5IDE3Ljc5NiwtNzIuNjczIDAuOTUyLC0xMTIuMzMxWiIgc3R5bGU9ImZpbGw6I2Y2ZTBiZDsiLz48cGF0aCBkPSJNNjkuNDQ4LDE5Ny41MzhjMCwwIC01OS43MDcsLTE1LjI0MyAtNjguMzk4LC0xNy40NjJjLTAuMDc2LC0wLjAxOSAtMC4xNTQsMC4wMiAtMC4xODQsMC4wOTJjLTAuMDMsMC4wNzIgLTAuMDAyLDAuMTU1IDAuMDY1LDAuMTk1YzkuNjgyLDUuNzc1IDkxLjY0Nyw1NC42NTggOTEuNjQ3LDU0LjY1OGwtMjMuMTMsLTM3LjQ4M1oiIHN0eWxlPSJmaWxsOiM4ZDZlNDE7Ii8+PHBhdGggZD0iTTE2NC40NSw0Ny45MDNjMCwtNS4zNTMgNC4zNDYsLTkuNjk4IDkuNjk4LC05LjY5OGwxOS4zOTcsLTBjNS4zNTIsLTAgOS42OTgsNC4zNDUgOS42OTgsOS42OThsLTAsMTU2Ljk1M2MtMCw1LjM1MyAtNC4zNDYsOS42OTggLTkuNjk4LDkuNjk4bC0xOS4zOTcsMGMtNS4zNTIsMCAtOS42OTgsLTQuMzQ1IC05LjY5OCwtOS42OThsMCwtMTU2Ljk1M1oiIHN0eWxlPSJmaWxsOiM3ZjY4NDU7Ii8+PHBhdGggZD0iTTI2My45OTMsMjU2LjEwM2MyMi4xNzEsLTE0LjcxIDM2LjAwNywtMzUuNTE1IDM2LjAwNywtNTguNTY1bC0yMzAuNTUyLDBjMCwyMy43MTMgMTQuNjQzLDQ1LjA1IDM3Ljk0LDU5LjgxOWM5Ljg3NSwtMy43MjkgMjAuMDQxLC0xMS4zMzQgMzAuNDYzLC0yMi4zMzZjMzIuODExLDM1LjQ1NSA2NC4wNjksMzUuOTQzIDkzLjcwOCwwYzYuODM4LDkuNjc3IDE3LjczNiwxNi42NDYgMzIuNDM0LDIxLjA4MloiIHN0eWxlPSJmaWxsOiNiNjkyNWY7Ii8+PC9nPjwvc3ZnPg==", Cheats.voyage);
         addMode("Gold Quest", "https://media.blooket.com/image/upload/v1661496292/Media/uiTest/Gold.svg", Cheats.gold);
         addMode("Cafe", "https://media.blooket.com/image/upload/v1655161189/Media/survivor/Pizza_lvl1.svg", Cheats.cafe);
         addMode("Crypto Hack", "https://media.blooket.com/image/upload/v1661496293/Media/uiTest/CryptoIcon.svg", Cheats.crypto);
@@ -3706,7 +3830,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1695256758601 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1695484594972 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

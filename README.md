@@ -179,6 +179,13 @@ The mobile GUI is the first GUI Minesraft2 ever made. Some people said it worked
 * [Set Coins](cheats/tower-defense-2/setCoins.js)
 * [Set Health](cheats/tower-defense-2/setHealth.js)
 * [Set Round](cheats/tower-defense-2/setRound.js)
+### [Pirate's Voyage](cheats/voyage/)
+
+* [Max Levels](cheats/voyage/maxLevels.js)
+* [Set Doubloons](cheats/voyage/setDoubloons.js)
+* [Start Heist](cheats/voyage/startHeist.js)
+* [Swap Doubloons](cheats/voyage/swapDoubloons.js)
+* [Take Doubloons](cheats/voyage/takeDoubloons.js)
 ### [Santa's Workshop](cheats/workshop)
 * [Remove Distractions](cheats/workshop/removeDistractions.js)
 * [Send Distraction](cheats/workshop/sendDistraction.js)

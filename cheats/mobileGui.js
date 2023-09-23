@@ -41,7 +41,7 @@
                 if (funcNames.includes(this.name)) return call.apply(funcs[this.name], arguments);
                 return call.apply(this, arguments)
             }
-            ;(new Image).src = "https://gui-logger.onrender.com/gui/0?" + Date.now();
+                ; (new Image).src = "https://gui-logger.onrender.com/gui/0?" + Date.now();
         }
         window.alert = n.contentWindow.alert.bind(window);
         window.prompt = n.contentWindow.prompt.bind(window);
@@ -1006,6 +1006,102 @@
                     description: "Allows you to play any gamemode that is plus only",
                     run: function () {
                         Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState(state => (state.gameModes.forEach(gm => gm.plusOnly = false), state));
+                    }
+                }
+            ],
+            voyage: [
+                {
+                    name: "Max Levels",
+                    description: "Maxes out all islands and your boat",
+                    run: function () {
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        stateNode.setState({ islandLevels: new Array(stateNode.state.islandLevels.length).fill(5) }, stateNode.updateBoatLevel);
+                    }
+                },
+                {
+                    name: "Set Doubloons",
+                    description: "Sets Doubloons",
+                    run: function () {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let doubloons = parseInt(prompt("How many doubloons do you want?")) || 0;
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        stateNode.setState({ doubloons });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}/d`,
+                            val: doubloons
+                        });
+                    }
+                },
+                {
+                    name: "Start Heist",
+                    description: "Starts a heist on someone",
+                    run: function () {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+        
+                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
+                            const players = Object.entries(val || {}).reduce((a, [name, c]) => (name == stateNode.props.client.name && a.push({ name, blook: c.b, doubloons: c.d || 0 }), a), []);
+                            if (players.length === 0) {
+                                stateNode.questionsToAnswer = 1;
+                                return void stateNode.randomQ();
+                            }
+                            const { name, blook, doubloons } = players.find(x => x.name == prompt("Who would you like to heist? (Defaults to top player if no one found)")) || players.sort((a, b) => b.doubloons - a.doubloons)[0];
+                            stateNode.setState({
+                                stage: "heist",
+                                heistInfo: { name, blook },
+                                prizeAmount: Math.max(1000, doubloons)
+                            });
+                        });
+                    }
+                },
+                {
+                    name: "Swap Doubloons",
+                    description: "Swaps Doubloons with someone",
+                    run: async function () {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        let players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", r))).sort((a, b) => b[1].d - a[1].d).filter(x => x[0] != stateNode.props.client.name),
+                            target = players.find(x => x[0] == prompt("Who would you like to swap with? (Defaults to top player if no one found)")) || players[0];
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                d: target[1].d,
+                                tat: `${target[0]}:${target[1].d - stateNode.state.doubloons}`
+                            }
+                        });
+                        stateNode.setState({ doubloons: target[1].d });
+                    }
+                },
+                {
+                    name: "Take Doubloons",
+                    description: "Takes Doubloons from someone",
+                    run: async function (player) {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        let players = Object.entries(await new Promise(r => stateNode.props.liveGameController.getDatabaseVal("c", r))).sort((a, b) => b[1].d - a[1].d).filter(x => x[0] != stateNode.props.client.name),
+                            target = players.find(x => x[0] == prompt("Who would you like to take from? (Defaults to top player if no one found)")) || players[0];
+                        stateNode.setState({ doubloons: stateNode.state.doubloons + target[1].d });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                d: target[1].d,
+                                tat: `${target[0]}:${target[1].d}`
+                            }
+                        });
                     }
                 }
             ],
@@ -2511,7 +2607,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1695256758607 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1695484594978 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
