@@ -2538,6 +2538,8 @@
             switch (window.location.pathname) {
                 case "/play/racing":
                     return capitalize ? "Racing" : "racing";
+                case "/play/pirate":
+                    return capitalize ? "Pirate's Voyage" : "voyage";
                 case "/play/factory":
                     return capitalize ? "Factory" : "factory";
                 case "/play/classic/get-ready":
@@ -2607,7 +2609,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1695484594978 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1695682338506 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
